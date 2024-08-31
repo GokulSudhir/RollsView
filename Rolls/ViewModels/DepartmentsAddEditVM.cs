@@ -8,10 +8,10 @@
         public string department_name { get; set; }
         public string? department_name_edit { get; set; }
 
-        [DisplayName("Department Code")]
-        public string department_code { get; set; }
+        [DisplayName("Department Classification")]
+        public string department_classification { get; set; }
 
-        public string? department_code_edit { get; set; }
+        public string? department_classification_edit { get; set; }
 
         public IList<string>? errors { get; set; }
 

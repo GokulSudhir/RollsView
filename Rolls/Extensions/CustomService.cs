@@ -7,6 +7,7 @@
             services.AddSingleton<ICountryCaller, CountryCaller>();
             services.AddSingleton<IBankCaller, BankCaller>();
             services.AddSingleton<IDepartmentCaller, DepartmentCaller>();
+            services.AddSingleton<IDepartmentsCaller, DepartmentsCaller>();
 
             return services;
         }

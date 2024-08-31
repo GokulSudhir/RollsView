@@ -204,22 +204,5 @@ namespace Rolls.Controllers
             //}
         }
 
-
-
-        //**************
-        [HttpPost]
-        public async Task<IActionResult> MyAction([FromHeader] BankAddEditVM dataObj)
-        {
-            // Do something with id
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult MyAction1(int id)
-        {
-            // Do something with id
-            return View();
-        }
-
     }
 }

@@ -220,7 +220,7 @@ function UpdateData() {
 
             .then(data => {
                 if (data.error == 'success') {
-                    $('#bank_name_edit').val('');
+                    $('#department_name_edit').val('');
                     GetData();
                     var modal = $('#editModal');
                     modal.modal('hide');

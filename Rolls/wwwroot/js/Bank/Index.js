@@ -486,7 +486,6 @@ function PermenentDeletePopup(bankId, bankName) {
 	$('#p_deleteModal').modal('show');
 }
 
-
 function PermenentDeleteData() {
 	var myDiv1 = document.getElementById("error-container_p_delete");
 	myDiv1.innerHTML = "";
