@@ -9,5 +9,6 @@
         public Task<string> GetDeletedDepartmentsAsync();
         public Task<string> DepartmentRestoreAsync(DepartmentsDeleteVM dataObj);
         public Task<string> DepartmentPermanentDeleteAsync(DepartmentsDeleteVM dataObj);
+        public Task<string> DepartmentDropDownAsync();
     }
 }

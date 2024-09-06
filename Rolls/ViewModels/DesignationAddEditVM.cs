@@ -8,7 +8,7 @@
         public string designation_name { get; set; }
         public string? designation_name_edit { get; set; }
 
-        [DisplayName("Designation Code")]
+        [DisplayName("Designation Category")]
         public string designation_category { get; set; }
 
         public string? designation_category_edit { get; set; }

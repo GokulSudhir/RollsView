@@ -1,27 +1,24 @@
-﻿@model Rolls.ViewModels.DesignationAddEditVM
+﻿@model Rolls.ViewModels.EmployeeAddEditVM
 @{
-    ViewData["Title"] = "Designation";
+    ViewData["Title"] = "Employee";
 }
 
-
 <div class="pagetitle">
-    <h1>Designation</h1>
+    <h1>Employee</h1>
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-            @*<li class="breadcrumb-item">Components</li>*@
-            <li class="breadcrumb-item active">Designation</li>
+            <li class="breadcrumb-item active">Employee</li>
         </ol>
     </nav>
 </div>
 
-
 <div class="row">
-    <div class="col-lg-6">
-
+    <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title"></h5>
+
                 <!-- Default Tabs -->
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
@@ -34,7 +31,7 @@
                 <div class="tab-content pt-2" id="myTabContent">
                     <div class="tab-pane fade show active" id="active" role="tabpanel" aria-labelledby="active-tab">
                         <div class="col-12">
-                            <form id="DepartmentForm">
+                            <form id="EmployeeForm">
                                 @if (Model.errors != null && Model.errors.Count > 0)
                                 {
                                     <div class="bs-callout-danger callout-border-left callout-transparent mt-1 p-1">
@@ -46,29 +43,57 @@
                                     </div>
                                 }
 
-                                <label for="txt_name" class="form-label col-form-label-sm ">Add Designation</label>
-                                <div class="input-group mb-3">
-                                    <input type="text" id="designation_name" class="form-control form-control-sm" placeholder="Designation Name" required>
+                                <!-- Name Fields -->
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <label for="first_name" class="form-label col-form-label-sm">First Name</label>
+                                        <input type="text" id="first_name" name="first_name" class="form-control form-control-sm" required>
+                                    </div>
+                                    <div class="col">
+                                        <label for="middle_name" class="form-label col-form-label-sm">Middle Name</label>
+                                        <input type="text" id="middle_name" name="middle_name" class="form-control form-control-sm">
+                                    </div>
+                                    <div class="col">
+                                        <label for="last_name" class="form-label col-form-label-sm">Last Name</label>
+                                        <input type="text" id="last_name" name="last_name" class="form-control form-control-sm" required>
+                                    </div>
                                 </div>
-                                <div class="input-group mb-3">
-                                    <select id="designation_category" class="form-select form-select-sm" required>
-                                        <option value="" disabled selected>Select Category</option>
-                                        <option value="Top Management">Top Management</option>
-                                        <option value="Middle Management">Middle Management</option>
-                                        <option value="Lower Management">Lower Management</option>
-                                    </select>
+
+                                <!-- Contact and Department Fields -->
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <label for="email" class="form-label col-form-label-sm">Email</label>
+                                        <input type="email" id="email" name="email" class="form-control form-control-sm" required>
+                                        <span asp-validation-for="email" class="text-danger"></span>
+                                    </div>
+                                    <div class="col">
+                                        <label for="mobile" class="form-label col-form-label-sm">Mobile</label>
+                                        <input type="tel" id="mobile" name="mobile" class="form-control form-control-sm" required>
+                                    </div>
+                                    <div class="col">
+                                        <label for="department_id" class="form-label col-form-label-sm">Department</label>
+                                        <select id="department_id" name="department_id" class="form-select form-select-sm" required>
+                                        </select>
+                                    </div>
+                                    <div class="col">
+                                        <label for="designation_id" class="form-label col-form-label-sm">Designation</label>
+                                        <select id="designation_id" name="designation_id" class="form-select form-select-sm" required>
+                                        </select>
+                                    </div>
                                 </div>
+
+                                
                                 <div class="input-group mb-3">
                                     <button type="button" id="btn_add" class="btn btn-success btn-sm">
-                                        <i class="bi bi-plus-circle"></i> Add
+                                        <i class="bi bi-save"></i> Submit
                                     </button>
                                 </div>
 
                                 <div id="error-container" style="font-size:small"></div>
                                 <span id="message" style="font-size:small"></span>
                             </form>
-
                         </div>
+
                         <div class="col-12">
                             <div class="container">
                                 <br />
@@ -76,27 +101,13 @@
                                     <table id="tbl_datatable" class="table table-striped table-bordered table-sm" style="font-size: 13px; width:100%">
                                         <thead class="">
                                             <tr>
-                                                <th class="border-top-0">Name</th>
-                                                <th class="border-top-0">Category</th>
-                                                <th class="border-top-0"></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody></tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="deleted" role="tabpanel" aria-labelledby="deleted-tab">
-                        <div class="col-12">
-                            <div class="container">
-                                <br />
-                                <div class="table-responsive">
-                                    <table id="tbl_datatable_deleted" class="table table-striped table-bordered table-sm" style="font-size: 13px; width:100%">
-                                        <thead class="">
-                                            <tr>
-                                                <th class="border-top-0">Name</th>
-                                                <th class="border-top-0">Category</th>
+                                                <th class="border-top-0">First Name</th>
+                                                <th class="border-top-0">Middle Name</th>
+                                                <th class="border-top-0">Last Name</th>
+                                                <th class="border-top-0">Email</th>
+                                                <th class="border-top-0">Mobile</th>
+                                                <th class="border-top-0">Department</th>
+                                                <th class="border-top-0">Designation</th>
                                                 <th class="border-top-0"></th>
                                             </tr>
                                         </thead>
@@ -107,7 +118,30 @@
                         </div>
                     </div>
                 </div>
-
+                <div class="tab-pane fade" id="deleted" role="tabpanel" aria-labelledby="deleted-tab">
+                    <div class="col-12">
+                        <div class="container">
+                            <br />
+                            <div class="table-responsive">
+                                <table id="tbl_datatable_deleted" class="table table-striped table-bordered table-sm" style="font-size: 13px; width:100%">
+                                    <thead class="">
+                                        <tr>
+                                            <th class="border-top-0">First Name</th>
+                                            <th class="border-top-0">Middle Name</th>
+                                            <th class="border-top-0">Last Name</th>
+                                            <th class="border-top-0">Email</th>
+                                            <th class="border-top-0">Mobile</th>
+                                            <th class="border-top-0">Department</th>
+                                            <th class="border-top-0">Designation</th>
+                                            <th class="border-top-0"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -118,7 +152,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Designation</h5>
+                <h5 class="modal-title">Employees</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -133,22 +167,26 @@
 
 @*//Edit Model*@
 <div class="modal shadow" id="editModal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
-    <input type="hidden" id="designation_id" />
+    <input type="hidden" id="employee_id" />
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Designation - Edit</h5>
+                <h5 class="modal-title">Employee - Edit</h5>
             </div>
             <div class="modal-body">
-                <span id="designationNameSpan" style="font-size:small"></span>
-                <input type="text" id="designation_name_edit" class="form-control form-control-sm" required>
+                <span id="employeeNameSpan" style="font-size:small"></span>
 
-                <select id="designation_category_edit" class="form-select form-select-sm" required>
-                    <option value="Top Management">Top Management</option>
-                    <option value="Middle Management">Middle Management</option>
-                    <option value="Lower Management">Lower Management</option>
+                <input type="text" id="first_name_edit" class="form-control form-control-sm" required>
+                <input type="text" id="middle_name_edit" class="form-control form-control-sm" required>
+                <input type="text" id="last_name_edit" class="form-control form-control-sm" required>
+                <input type="text" id="email_id_edit" class="form-control form-control-sm" required>
+                <input type="text" id="mobile_edit" class="form-control form-control-sm" required>
+
+                <select id="department_id_edit" class="form-select form-select-sm" required>
                 </select>
-                
+                <select id="designation_id_edit" class="form-select form-select-sm" required>
+                </select>
+
                 <span asp-validation-for="Input"></span>
 
                 <div id="error-container_edit" style="font-size:small"></div>
@@ -164,14 +202,14 @@
 
 @*//Delete Model*@
 <div class="modal shadow" id="deleteModal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
-    <input type="hidden" id="delete_designation_id" />
+    <input type="hidden" id="delete_employee_id" />
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Designation - Delete</h5>
+                <h5 class="modal-title">Employee - Delete</h5>
             </div>
             <div class="modal-body">
-                <span id="designationNameSpan2" style="font-size:large"></span>
+                <span id="employeeNameSpan2" style="font-size:large"></span>
                 <span asp-validation-for="Input"></span>
 
                 <div id="error-container_delete" style="font-size:small"></div>
@@ -187,14 +225,14 @@
 
 @*//Restore Model*@
 <div class="modal shadow" id="restoreModal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
-    <input type="hidden" id="restore_designation_id" />
+    <input type="hidden" id="restore_employee_id" />
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Designation - Restore</h5>
+                <h5 class="modal-title">Employee - Restore</h5>
             </div>
             <div class="modal-body">
-                <span id="designationNameSpan3" style="font-size:large"></span>
+                <span id="employeeNameSpan3" style="font-size:large"></span>
                 <span asp-validation-for="Input"></span>
 
                 <div id="error-container_restore" style="font-size:small"></div>
@@ -210,14 +248,14 @@
 
 @*//Permenent Delete Model*@
 <div class="modal shadow" id="p_deleteModal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
-    <input type="hidden" id="p_delete_designation_id" />
+    <input type="hidden" id="p_delete_employee_id" />
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Designation - Permenent Delete</h5>
+                <h5 class="modal-title">Employee - Permenent Delete</h5>
             </div>
             <div class="modal-body">
-                <span id="designationNameSpan4" style="font-size:large"></span>
+                <span id="employeeNameSpan4" style="font-size:large"></span>
                 <span asp-validation-for="Input"></span>
 
                 <div id="error-container_p_delete" style="font-size:small"></div>
@@ -231,8 +269,7 @@
     </div>
 </div>
 
-
 @section Scripts {
-    <script src="~/js/Designation/Index.js" defer></script> 
+    <script src="~/js/Employee/Index.js" defer></script>
     <script src="~/js/Shared/Validation.js" defer></script>
 }

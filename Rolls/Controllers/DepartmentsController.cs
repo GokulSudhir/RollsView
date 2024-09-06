@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using iText.Kernel.Geom;
+using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
 
 namespace Rolls.Controllers
 {
@@ -169,11 +171,11 @@ namespace Rolls.Controllers
                 //in case of exists
                 if (response == 3)
                 {
-                    errors.Add($"Department Name or Department Code already exists");
+                    errors.Add($"Department Name or Department Classification already exists");
                 }
                 else
                 {
-                    errors.Add($"Department Name or Department Code already exists Deleted banks");
+                    errors.Add($"Department Name or Department Classification already exists in Deleted Departments");
                 }
             }
 
@@ -268,7 +270,8 @@ namespace Rolls.Controllers
                         dataObj.Add(new Departments()
                         {
                             department_id = item.department_id,
-                            department_name = item.department_name
+                            department_name = item.department_name,
+                            department_classification = item.department_classification
                         });
                     }
                 }
@@ -400,6 +403,37 @@ namespace Rolls.Controllers
             };
             return Json(jsonObj2);
 
+        }
+
+        [Route("/Departments/DepartmentDropDown")]
+        public async Task<JsonResult> DepartmentDropDown()
+        {
+            List<DepartmentDropDown> dataObj = new List<DepartmentDropDown>();
+            try
+            {
+                var result = await _caller.DepartmentDropDownAsync();
+
+                var jsonObj = JObject.Parse(result);
+                if ((int)jsonObj["status"] == 200)
+                {
+                    var listObj = (dynamic)jsonObj["dataObj"];
+
+                    foreach (var item in listObj)
+                    {
+                        dataObj.Add(new DepartmentDropDown()
+                        {
+                            department_id = item.department_id,
+                            department_name = item.department_name
+                        });
+                    }
+                }
+            }
+            catch (Exception err)
+            {
+                Log.Error(err, $"DepartmentsController/DepartmentDropDown Err:{err.GetBaseException().Message}");
+            }
+
+            return Json(dataObj);
         }
     }
 }
