@@ -4,6 +4,7 @@
     {
         public long? designation_id { get; set; }
 
+        [Required]
         [DisplayName("Designation Name")]
         public string designation_name { get; set; }
         public string? designation_name_edit { get; set; }

@@ -40,6 +40,7 @@ async function Init() {
 }
 
 async function GetDepartmentsDropDown(options = {}) {
+
     try {
         const response = await fetch('/Departments/DepartmentDropDown', {
             method: 'POST',
@@ -86,6 +87,7 @@ async function GetDepartmentsDropDown(options = {}) {
 }
 
 async function GetDesignationsDropDown(options = {}) {
+
     try {
         const response = await fetch('/Designation/DesignationDropDown', {
             method: 'POST',
@@ -146,78 +148,52 @@ async function InsertData() {
     let departmentId = $('#department_id').val();
     let designationId = $('#designation_id').val();
 
-    var chk = minMaxLength(2, 50, firstName);
-    if (chk == false) {
-        cnt = 1;
-    }
+    const data = {
 
-    chk = lettersSpaceAnd(firstName);
-    if (chk == false) {
-        cnt = 2;
-    }
+        first_name: firstName,
+        middle_name: middleName,
+        last_name: lastName,
+        email_id: emailId,
+        mobile: mobilE,
+        department_id: departmentId,
+        designation_id: designationId
+    };
 
-    if (cnt == 0) {
+    try {
 
-        const data = {
+        const response = await fetch('/Employee/AddEmployee', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
 
-            first_name: firstName,
-            middle_name: middleName,
-            last_name: lastName,
-            email_id: emailId,
-            mobile: mobilE,
-            department_id: departmentId,
-            designation_id: designationId
-        };
+        const result = await response.json();
 
-        try {
-
-            const response = await fetch('/Employee/AddEmployee', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            });
-
-            const result = await response.json();
-
-            if (result.statusCode === 200) {
-                $('#first_name').val('');
-                $('#middle_name').val('');
-                $('#last_name').val('');
-                $('#email').val('');
-                $('#mobile').val('');
-                $('#department_id').val('');
-                $('#designation_id').val('');
-                $('span#mySpan').css('color', 'green');
-                $('span#mySpan').text('Employee Added');
-                $('#alertModal').modal('show');
-                GetData();
-            } else {
-                const spanElement = document.getElementById("message");
-                spanElement.style.color = "red";
-                spanElement.innerText = result.errors.join('\n');
-            }
-        }
-
-        catch (error) {
-            
-            alert('Error sending data!');
-            console.log('Error sending data:', error);
-        }
-    }
-
-    else {
-
-        var msg = '';
-        if (cnt == 1) {
-            msg = "Employee Name should be 2 to 50 characters long.";
+        if (result.statusCode === 200) {
+            $('#first_name').val('');
+            $('#middle_name').val('');
+            $('#last_name').val('');
+            $('#email').val('');
+            $('#mobile').val('');
+            $('#department_id').val('');
+            $('#designation_id').val('');
+            $('span#mySpan').css('color', 'green');
+            $('span#mySpan').text('Employee Added');
+            $('#alertModal').modal('show');
+            GetData();
         } else {
-            msg = "Employee Name should contain only Letters, spaces and &.";
+            const spanElement = document.getElementById("message");
+            spanElement.style.color = "red";
+            spanElement.innerText = result.errors.join('\n');
         }
-        spanMessage.style.color = "red";
-        spanMessage.innerText = msg;
+    }
 
+    catch (error) {
+
+        alert('Error sending data!');
+        console.log('Error sending data:', error);
     }
 }
 

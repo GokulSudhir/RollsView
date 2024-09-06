@@ -125,7 +125,7 @@ function InsertData() {
                     GetData();
                     $('#alertModal').modal('show');
                 } else {
-                    //*** writ to Span */
+                    //*** write to Span */
                     var spanElement = document.getElementById("message");
                     spanElement.style.color = "red";
                     for (const element of data.errors) {
